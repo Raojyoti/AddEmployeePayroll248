@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 /*AddEmployeePayrol UC-3 => On Save Create Employee Payroll Object */
-/*const save=(event)=>
+/* const save=(event)=>
 {
     try{
         let employeePayrollData= createEmployeePayroll();
@@ -36,7 +36,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         return(e);
     }
 }*/
-    const createEmployeePayroll=()=>{
+
+const createEmployeePayroll=()=>{
     let employeePayrollData=new EmployeePayrollData();
     try{
         employeePayrollData.name=getInputValueById('#name');
@@ -75,6 +76,7 @@ const getInputElementValue =(id) =>
     let value = document.getElementById(id).value;
     return value;
 }
+
 /*AddEmployeePayrol UC-4  => Saving Employee Payroll to Local Storage */
 const save =()=>
 {
@@ -99,3 +101,33 @@ function createAddUpdateStorage(employeePayrollData){
     alert(employeePayrollList.toString());
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
 }
+
+/*AddPayroll UC-5 =>  Reset the Employee Payroll Form */
+const resetForm=() =>
+{
+    setValue('#name','');
+    setValuebyClassName('.text-error','');
+    unsetSelectedValues('[name=profile]');
+    unsetSelectedValues('[name=gender]');
+    unsetSelectedValues('[name=department]');
+    setValuebyClassName('.salary-output','700000');
+    setValue('#notes','');
+    setValue('#day','1');
+    setValue('#month','january')
+    setValue('#year','2023');
+}
+const unsetSelectedValues=(propertyValue)=>{
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item=>{
+        item.checked=false;
+    });
+}
+const setValue=(id,value)=>{
+    const element = document.querySelector(id);
+    element.value=value;
+  }
+  
+const setValuebyClassName=(id,value)=>{
+    const element=document.querySelector(id);
+    element.textContent=value;
+  }
